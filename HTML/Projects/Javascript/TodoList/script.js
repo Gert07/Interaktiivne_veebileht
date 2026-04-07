@@ -1,8 +1,8 @@
+// Wait for page to load
 document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('task-input');
     const addTaskBtn = document.getElementById('add-task-btn');
     const taskList = document.getElementById('task-list');
-    const emptyImage = document.querySelector('.empty-image');
 
     // Load tasks from LocalStorage
     const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -16,12 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
         localStorage.setItem('tasks', JSON.stringify(tasks));
-    };
-
-    const toggleEmptyState = () => {
-        if (emptyImage) {
-            emptyImage.style.display = taskList.children.length === 0 ? 'block' : 'none';
-        }
     };
 
     const createTaskElement = (text, completed = false) => {
@@ -66,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Delete Task
         deleteBtn.addEventListener('click', () => {
             li.remove();
-            toggleEmptyState();
             saveToLocalStorage();
         });
 
@@ -81,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
         taskList.appendChild(taskElement);
         
         taskInput.value = '';
-        toggleEmptyState();
         saveToLocalStorage();
     };
 
